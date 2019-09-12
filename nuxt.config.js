@@ -10,7 +10,7 @@ const routerBase =
     : {}
 
 export default {
-  router: routerBase,
+  routerBase,
   mode: 'universal',
   /*
    ** Headers of the page
