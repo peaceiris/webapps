@@ -11,13 +11,19 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: build
+    - name: setup node
       uses: actions/setup-node@v1
       with:
         node-version: '10.16'
-    - run: |
-        npm install
-        npm run generate
+
+    - name: install
+      run: npm install
+
+    - name: test
+      run: npm test
+
+    - name: generate
+      run: npm run generate
 
     - name: deploy
       # uses: peaceiris/actions-gh-pages@v2.2.0
