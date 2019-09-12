@@ -17,7 +17,7 @@ jobs:
         node-version: '10.16'
     - run: |
         npm install
-        npm run generate
+        npm run generate:gh-pages
 
     - name: deploy
       # uses: peaceiris/actions-gh-pages@v2.2.0
