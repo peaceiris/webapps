@@ -4,17 +4,25 @@ on:
   push:
     branches:
     - master
+    paths:
+    - '**'
+    - '.**'
+    - '!.editorconfig'
+    - '!.gitignore'
+    - '!README.md'
 
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 1
 
     - name: setup node
       uses: actions/setup-node@v1
       with:
-        node-version: '10.16'
+        node-version: '10.x'
 
     - name: install
       run: npm install
@@ -27,7 +35,7 @@ jobs:
 
     - name: deploy
       # uses: peaceiris/actions-gh-pages@v2.2.0
-      uses: docker://peaceiris/gh-pages:v2.2.0
+      uses: docker://peaceiris/gh-pages:v2.3.2
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: gh-pages
