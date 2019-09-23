@@ -4,11 +4,6 @@ on:
   push:
     branches:
     - master
-    paths:
-    - '**'
-    - '!.editorconfig'
-    - '!.gitignore'
-    - '!README.md'
 
 jobs:
   build-deploy:
