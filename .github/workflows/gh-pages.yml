@@ -6,7 +6,6 @@ on:
     - master
     paths:
     - '**'
-    - '.**'
     - '!.editorconfig'
     - '!.gitignore'
     - '!README.md'
