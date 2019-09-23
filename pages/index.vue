@@ -7,7 +7,7 @@
       </div>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          QR code web app (Scan and Generate)
         </v-card-title>
         <v-card-text>
           <p>
