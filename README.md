@@ -10,7 +10,7 @@ Web app for scanning and generating QR Code.
 
 ``` bash
 # install dependencies
-npm run install
+npm ci
 
 # serve with hot reload at localhost:3000
 npm run dev
