@@ -1,34 +1,19 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <div class="text-center">
+      <!-- <div class="text-center">
         <logo />
         <vuetify-logo />
-      </div>
+      </div> -->
       <v-card>
         <v-card-title class="headline">
           QR code web app (Scan and Generate)
         </v-card-title>
         <v-card-text>
           <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a href="https://vuetifyjs.com" target="_blank"> documentation </a>.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">
-              discord </a
-            >.
-          </p>
-          <p>
             Find a bug? Report it on the github
             <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
+              href="https://github.com/peaceiris/qrcode-webapp/issues"
               target="_blank"
               title="contribute"
             >
@@ -40,15 +25,15 @@
             more exciting features in the future.
           </p>
           <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
+            <em><small>&mdash; peaceiris</small></em>
           </div>
           <hr class="my-3" />
-          <a href="https://nuxtjs.org/" target="_blank">
-            Nuxt Documentation
+          <a href="https://github.com/peaceiris/qrcode-webapp" target="_blank">
+            Source code - GitHub peaceiris/qrcode-webapp
           </a>
           <br />
-          <a href="https://github.com/nuxt/nuxt.js" target="_blank">
-            Nuxt GitHub
+          <a href="https://peaceiris.com" target="_blank">
+            peaceiris homepage
           </a>
         </v-card-text>
         <v-card-actions>
@@ -63,13 +48,13 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+// import Logo from '~/components/Logo.vue'
+// import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
-export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  }
-}
+// export default {
+//   components: {
+//     Logo,
+//     VuetifyLogo
+//   }
+// }
 </script>
