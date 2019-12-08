@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
 
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v1
       with:
         fetch-depth: 1
 
     - name: setup node
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '12.x'
 
     - name: Cache dependencies
       uses: actions/cache@v1
@@ -43,5 +43,5 @@ jobs:
         PUBLISH_DIR: ./dist
         SCRIPT_MODE: true
       run: |
-        wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2.5.0/entrypoint.sh
+        wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2/entrypoint.sh
         bash ./entrypoint.sh
