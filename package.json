@@ -12,14 +12,22 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "format": "prettier **/*.{js,vue}",
     "format:check": "prettier --check **/*.{js,vue}",
-    "test": "jest"
+    "test": "jest --coverage --verbose",
+    "release": "standard-version",
+    "update-deps": "(git diff 'HEAD@{1}' --name-only | grep 'package-lock.json' > /dev/null) && npm ci || :"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint"
+    "*.{js,vue}": [
+      "prettier --check",
+      "eslint",
+      "jest"
+    ]
   },
   "husky": {
+    "skipCI": true,
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-merge": "npm run update-deps; git remote prune origin"
     }
   },
   "dependencies": {
