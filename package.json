@@ -1,7 +1,7 @@
 {
-  "name": "qrcode-webapp",
-  "version": "1.0.0",
-  "description": "Web app for scanning and generating QR Code",
+  "name": "webapp",
+  "version": "0.1.0",
+  "description": "Web Apps",
   "author": "peaceiris",
   "private": true,
   "scripts": {
