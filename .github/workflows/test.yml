@@ -14,7 +14,7 @@ on:
       - '**.md'
 
 jobs:
-  skipcd:
+  skipci:
     runs-on: ubuntu-18.04
     steps:
       - run: echo "[Skip CI] ${{ contains(github.event.head_commit.message, '[skip ci]') }}"
@@ -44,6 +44,16 @@ jobs:
           ${{ runner.os }}-node-
 
     - run: npm ci
-    - run: npm format:check
-    - run: npm lint
+    - run: npm run format:check
+    - run: npm run lint
     - run: npm test
+
+    - name: Upload test coverage as artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: coverage
+        path: coverage
+
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

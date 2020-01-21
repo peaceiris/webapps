@@ -20,7 +20,7 @@
     "*.{js,vue}": [
       "prettier --check",
       "eslint",
-      "jest"
+      "jest --passWithNoTests"
     ]
   },
   "husky": {
