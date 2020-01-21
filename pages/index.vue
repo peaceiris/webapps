@@ -3,13 +3,13 @@
     <v-flex xs12 sm8 md6>
       <v-card>
         <v-card-title class="headline">
-          QR code web app (Scan and Generate)
+          Web Apps
         </v-card-title>
         <v-card-text>
           <p>
             Find a bug? Report it on the github
             <a
-              href="https://github.com/peaceiris/qrcode-webapp/issues"
+              href="https://github.com/peaceiris/webapps/issues"
               target="_blank"
               title="contribute"
             >
@@ -24,8 +24,8 @@
             <em><small>&mdash; peaceiris</small></em>
           </div>
           <hr class="my-3" />
-          <a href="https://github.com/peaceiris/qrcode-webapp" target="_blank">
-            Source code - GitHub peaceiris/qrcode-webapp
+          <a href="https://github.com/peaceiris/webapps" target="_blank">
+            Source code - GitHub peaceiris/webapps
           </a>
           <br />
           <a href="https://peaceiris.com" target="_blank">
