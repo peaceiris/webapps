@@ -1,12 +1,13 @@
-## QR Code Web App
+## Web Apps
 
-Web app for scanning and generating QR Code.
+> [Web Apps](https://web.peaceiris.app)
 
-- [QR Code Web App](https://qrcode.peaceiris.com/)
+- Scan and Generate QR Code
+- Generate Table of Contents from Markdown
 
 
 
-## Development
+## Maintainer Notes
 
 ``` bash
 # install dependencies
