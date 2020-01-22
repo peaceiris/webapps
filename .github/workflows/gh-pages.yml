@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - run: echo "[Skip CD] ${{ contains(github.event.head_commit.message, '[skip cd]') }}"
-      - run: echo "[Skip CD] ${{ contains(github.event.head_commit.message, '[skip ci]') }}"
+      - run: echo "[Skip CI] ${{ contains(github.event.head_commit.message, '[skip ci]') }}"
 
   deploy:
     runs-on: ubuntu-18.04
