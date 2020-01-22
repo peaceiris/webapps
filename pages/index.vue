@@ -34,7 +34,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">
+          <v-btn color="primary" nuxt to="/qrcode-reader">
             Continue
           </v-btn>
         </v-card-actions>
