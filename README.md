@@ -1,3 +1,7 @@
+[![codecov](https://codecov.io/gh/peaceiris/webapps/branch/master/graph/badge.svg)](https://codecov.io/gh/peaceiris/webapps)
+
+
+
 ## Web Apps
 
 > [Web Apps](https://web.peaceiris.app)
