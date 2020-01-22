@@ -7,18 +7,14 @@
         </v-card-title>
         <v-card-text>
           <p>
-            Find a bug? Report it on the github
+            Find a bug? Report it on the GitHub
             <a
               href="https://github.com/peaceiris/webapps/issues"
               target="_blank"
-              title="contribute"
+              title="GitHub Issues"
             >
               issue board </a
             >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
           </p>
           <div class="text-xs-right">
             <em><small>&mdash; peaceiris</small></em>
@@ -35,7 +31,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/qrcode-reader">
-            Continue
+            QR Code Reader
           </v-btn>
         </v-card-actions>
       </v-card>
