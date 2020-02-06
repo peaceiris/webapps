@@ -40,18 +40,11 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-
       - run: npm test
-
       - run: npm run generate
 
-      - name: Deploy (script mode)
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
-          SCRIPT_MODE: true
-        run: |
-          wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2/entrypoint.sh
-          bash ./entrypoint.sh
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./dist
