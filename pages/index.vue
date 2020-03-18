@@ -30,8 +30,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/qrcode-reader">
-            QR Code Reader
+          <v-btn color="primary" nuxt to="/qrcode-generator">
+            QR Code Generator
           </v-btn>
         </v-card-actions>
       </v-card>

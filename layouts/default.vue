@@ -79,8 +79,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'QR Code Reader',
-          to: '/qrcode-reader'
+          title: 'QR Code Generator',
+          to: '/qrcode-generator'
         }
       ],
       miniVariant: false,
