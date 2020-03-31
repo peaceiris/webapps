@@ -114,7 +114,12 @@ export default {
   },
   methods: {
     updateGraph() {
-      const url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}`
+      let url = ''
+      if (process.env.NODE_ENV === 'production') {
+        url = `https://pixe.la/v1/users/${this.username}/graphs/${this.graph}`
+      } else {
+        url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}`
+      }
       const date = new Date()
       const content = {
         date: `${formatDate(date, 'yyyyMMdd')}`,

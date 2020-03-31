@@ -9,7 +9,7 @@
     "nuxt": "nuxt-ts",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
-    "generate": "nuxt-ts generate",
+    "generate": "NODE_ENV=production nuxt-ts generate",
     "client": "wait-on http://localhost:3000 && open http://localhost:3000",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "format": "prettier --write **/*.{js,vue}",
