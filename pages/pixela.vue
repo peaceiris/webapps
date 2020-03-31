@@ -2,16 +2,9 @@
   <v-layout>
     <v-flex class="text-center">
       <h1>Pixela Web UI</h1>
-      <a
-        href="https://pixe.la/v1/users/peaceiris/graphs/vital-warmth.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a :href="urlGraph" target="_blank" rel="noopener noreferrer">
         Vital Warmth
-        <img
-          src="https://pixe.la/v1/users/peaceiris/graphs/vital-warmth"
-          alt="peaceiris Vital Warmth"
-        />
+        <img :src="urlSVG" alt="peaceiris Vital Warmth" />
       </a>
       <v-form>
         <v-container fluid>
@@ -56,12 +49,17 @@
               />
             </v-col>
             <v-col cols="12" sm="6" md="6">
-              <v-btn color="primary" rounded @click="updateGraph()">
-                Submit
+              <v-btn color="primary" rounded @click="createPixel()">
+                Submit Today
               </v-btn>
             </v-col>
             <v-col cols="12" sm="6" md="6">
               {{ response }}
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              <v-btn color="red" rounded @click="deletePixel()">
+                Delete Today
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -74,6 +72,8 @@
 import axios from 'axios'
 
 const nomalTemp = 36.9
+const urlSVG = 'https://pixe.la/v1/users/peaceiris/graphs/vital-warmth'
+const urlGraph = `${urlSVG}.html`
 
 function getTempItems() {
   const items = []
@@ -96,10 +96,15 @@ function formatDate(date, format) {
   return format
 }
 
+function openInNewTab(url) {
+  const win = window.open(url, '_blank')
+  win.focus()
+}
+
 export default {
   data() {
     return {
-      username: '',
+      username: 'peaceiris',
       token: '',
       graph: 'vital-warmth',
       rules: {
@@ -109,11 +114,13 @@ export default {
       nomal: `${nomalTemp}`,
       selected: `${nomalTemp}`,
       items: getTempItems(),
-      response: ''
+      response: '',
+      urlSVG,
+      urlGraph
     }
   },
   methods: {
-    updateGraph() {
+    createPixel() {
       let url = ''
       if (process.env.NODE_ENV === 'production') {
         url = `https://pixe.la/v1/users/${this.username}/graphs/${this.graph}`
@@ -137,6 +144,33 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
+          openInNewTab(this.urlGraph)
+        })
+        .catch((error) => {
+          alert(error)
+        })
+    },
+    deletePixel() {
+      const date = new Date()
+      const today = `${formatDate(date, 'yyyyMMdd')}`
+      let url = ''
+      if (process.env.NODE_ENV === 'production') {
+        url = `https://pixe.la/v1/users/${this.username}/graphs/${this.graph}/${today}`
+      } else {
+        url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}/${today}`
+      }
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'X-USER-TOKEN': `${this.token}`
+        },
+        url
+      }
+      axios(options)
+        .then((response) => {
+          this.response = response.data
+          openInNewTab(this.urlGraph)
         })
         .catch((error) => {
           alert(error)
