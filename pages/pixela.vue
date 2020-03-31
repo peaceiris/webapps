@@ -23,7 +23,7 @@
               <v-text-field
                 :append-icon="token ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
-                :type="token ? 'text' : 'password'"
+                :type="'password'"
                 name="input-10-2"
                 label="pixela-token"
                 hint="Your Pixela Token Here"
@@ -38,6 +38,7 @@
                 hint="Your Normal Temperature Here"
                 :value="nomal"
                 :rules="[rules.required]"
+                :type="'number'"
                 @change="setNomal"
               />
             </v-col>
@@ -49,6 +50,7 @@
                 item-value="value"
                 label="Current Temperature"
                 hint="Your Current Temperature Here"
+                menu-props="auto"
               />
             </v-col>
           </v-row>
