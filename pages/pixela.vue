@@ -3,7 +3,7 @@
     <v-flex class="text-center">
       <h1>Pixela Web UI</h1>
       <a :href="urlGraph" target="_blank" rel="noopener noreferrer">
-        Vital Warmth
+        <h2>Vital Warmth</h2>
         <img :src="urlSVG" alt="peaceiris Vital Warmth" />
       </a>
       <v-form>
