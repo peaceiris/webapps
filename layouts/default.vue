@@ -81,6 +81,11 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'QR Code Generator',
           to: '/qrcode-generator'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Pixela Web UI',
+          to: '/pixela'
         }
       ],
       miniVariant: false,
