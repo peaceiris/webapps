@@ -54,7 +54,14 @@
                 hint="Your Current Temperature Here"
                 menu-props="auto"
               />
-              {{ selected }}
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              <v-btn color="primary" rounded @click="updateGraph()">
+                Submit
+              </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              {{ response }}
             </v-col>
           </v-row>
         </v-container>
@@ -64,6 +71,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 const nomalTemp = 36.9
 
 function getTempItems() {
@@ -76,18 +85,57 @@ function getTempItems() {
   return items
 }
 
+function formatDate(date, format) {
+  format = format.replace(/yyyy/g, date.getFullYear())
+  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2))
+  format = format.replace(/dd/g, ('0' + date.getDate()).slice(-2))
+  format = format.replace(/HH/g, ('0' + date.getHours()).slice(-2))
+  format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2))
+  format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2))
+  format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3))
+  return format
+}
+
 export default {
   data() {
     return {
       username: '',
       token: '',
+      graph: 'vital-warmth',
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 50 || 'Min 50 characters'
       },
       nomal: `${nomalTemp}`,
       selected: `${nomalTemp}`,
-      items: getTempItems()
+      items: getTempItems(),
+      response: ''
+    }
+  },
+  methods: {
+    updateGraph() {
+      const url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}`
+      const date = new Date()
+      const content = {
+        date: `${formatDate(date, 'yyyyMMdd')}`,
+        quantity: `${this.selected - this.nomal}`
+      }
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'X-USER-TOKEN': `${this.token}`
+        },
+        data: content,
+        url
+      }
+      axios(options)
+        .then((response) => {
+          this.response = response.data
+        })
+        .catch((error) => {
+          alert(error)
+        })
     }
   }
 }
