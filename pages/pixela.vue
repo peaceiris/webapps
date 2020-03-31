@@ -48,15 +48,13 @@
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-select
-                v-model="defaultSelected"
+                v-model="selected"
                 :items="items"
-                item-text="label"
-                item-value="value"
                 label="Current Temperature"
                 hint="Your Current Temperature Here"
                 menu-props="auto"
-                return-object
               />
+              {{ selected }}
             </v-col>
           </v-row>
         </v-container>
@@ -73,7 +71,7 @@ function getTempItems() {
 
   for (let i = 0; i < 50; i++) {
     const j = (i * 0.1 + 35.5).toFixed(1)
-    items.push({label: `${j}`, value: `${j}`})
+    items.push(`${j}`)
   }
   return items
 }
@@ -88,7 +86,7 @@ export default {
         min: (v) => v.length >= 50 || 'Min 50 characters'
       },
       nomal: `${nomalTemp}`,
-      defaultSelected: {label: `${nomalTemp}`, value: `${nomalTemp}`},
+      selected: `${nomalTemp}`,
       items: getTempItems()
     }
   }
