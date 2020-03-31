@@ -27,6 +27,7 @@ module.exports = {
         }
       }
     ],
-    'object-curly-spacing': ['error', 'never']
+    'object-curly-spacing': ['error', 'never'],
+    'arrow-parens': 'off'
   }
 }

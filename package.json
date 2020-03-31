@@ -12,7 +12,7 @@
     "generate": "nuxt-ts generate",
     "client": "wait-on http://localhost:3000 && open http://localhost:3000",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "format": "prettier **/*.{js,vue}",
+    "format": "prettier --write **/*.{js,vue}",
     "format:check": "prettier --check **/*.{js,vue}",
     "test": "jest --coverage --verbose",
     "release": "standard-version",
@@ -20,7 +20,7 @@
   },
   "lint-staged": {
     "*.{js,vue}": [
-      "prettier --check",
+      "prettier --write",
       "eslint",
       "jest --passWithNoTests"
     ]
