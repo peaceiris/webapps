@@ -46,9 +46,7 @@ export default {
       token: false,
       password: 'Password',
       rules: {
-        // eslint-disable-next-line prettier/prettier
         required: (value) => !!value || 'Required.',
-        // eslint-disable-next-line prettier/prettier
         min: (v) => v.length >= 50 || 'Min 50 characters'
       }
     }
