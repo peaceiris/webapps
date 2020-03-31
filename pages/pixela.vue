@@ -17,15 +17,20 @@
         <v-container fluid>
           <v-row>
             <v-col cols="12" sm="6" md="6">
-              <v-text-field label="pixela-username" :rules="[rules.required]" />
+              <v-text-field
+                v-model="username"
+                label="Username"
+                :rules="[rules.required]"
+              />
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
+                v-model="token"
                 :append-icon="token ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 type="password"
                 name="input-10-2"
-                label="pixela-token"
+                label="Token"
                 hint="Your Pixela Token Here"
                 value=""
                 class="input-group--focused"
@@ -34,12 +39,11 @@
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
+                v-model="nomal"
                 label="Normal Temperature"
                 hint="Your Normal Temperature Here"
-                :value="nomal"
                 :rules="[rules.required]"
                 type="number"
-                @change="setNomal"
               />
             </v-col>
             <v-col cols="12" sm="6" md="6">
@@ -51,6 +55,7 @@
                 label="Current Temperature"
                 hint="Your Current Temperature Here"
                 menu-props="auto"
+                return-object
               />
             </v-col>
           </v-row>
@@ -76,8 +81,8 @@ function getTempItems() {
 export default {
   data() {
     return {
-      token: false,
-      password: 'Password',
+      username: '',
+      token: '',
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 50 || 'Min 50 characters'
@@ -85,11 +90,6 @@ export default {
       nomal: `${nomalTemp}`,
       defaultSelected: {label: `${nomalTemp}`, value: `${nomalTemp}`},
       items: getTempItems()
-    }
-  },
-  methods: {
-    setNomal(nomal) {
-      this.nomal = nomal
     }
   }
 }
