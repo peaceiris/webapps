@@ -3,36 +3,50 @@
     <v-flex class="text-center">
       <h1>Pixela Web UI</h1>
 
-      <v-row>
-        <v-col cols="12" sm="6" md="6">
-          <a
-            :href="`${urlGraphSVGDiff}.html`"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>Vital Warmth Diff</h2>
-            <img
-              :src="urlGraphSVGDiff + '#svgView(viewBox(480, 0, 720, 135))'"
-              alt="peaceiris vital warmth difference between current and nomal"
-              class="pixela-graph-wrap"
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12">
+            <v-progress-circular
+              v-if="isLoading"
+              indeterminate
+              color="primary"
             />
-          </a>
-        </v-col>
-        <v-col cols="12" sm="6" md="6">
-          <a
-            :href="`${urlGraphSVGActual}.html`"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>Vital Warmth Actual</h2>
-            <img
-              :src="urlGraphSVGActual + '#svgView(viewBox(480, 0, 720, 135))'"
-              alt="peaceiris actual vital warmth"
-              class="pixela-graph-wrap"
+            <a
+              :href="`${urlGraphSVGDiff}.html`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h2>Vital Warmth Diff</h2>
+              <v-img
+                :key="imageShowKey"
+                :src="urlGraphSVGDiff"
+                alt="peaceiris vital warmth difference between current and nomal"
+                @load="loadedImage"
+              />
+            </a>
+          </v-col>
+          <v-col cols="12">
+            <v-progress-circular
+              v-if="isLoading"
+              indeterminate
+              color="primary"
             />
-          </a>
-        </v-col>
-      </v-row>
+            <a
+              :href="`${urlGraphSVGActual}.html`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h2>Vital Warmth Actual</h2>
+              <v-img
+                :key="imageShowKey"
+                :src="urlGraphSVGActual"
+                alt="peaceiris actual vital warmth"
+                @load="loadedImage"
+              />
+            </a>
+          </v-col>
+        </v-row>
+      </v-container>
 
       <v-form>
         <v-container fluid>
@@ -155,7 +169,14 @@ export default {
       items: getTempItems(),
       response: '',
       urlGraphSVGDiff,
-      urlGraphSVGActual
+      urlGraphSVGActual,
+      isLoading: true,
+      imageShowKey: 0
+    }
+  },
+  provide() {
+    return {
+      reload: this.reload
     }
   },
   methods: {
@@ -183,6 +204,9 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
+          setTimeout(() => {
+            this.imageShowKey += 1
+          }, 500)
         })
         .catch((error) => {
           alert(error)
@@ -208,17 +232,17 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
+          setTimeout(() => {
+            this.imageShowKey += 1
+          }, 500)
         })
         .catch((error) => {
           alert(error)
         })
+    },
+    loadedImage() {
+      this.isLoading = false
     }
   }
 }
 </script>
-
-<style scoped>
-.pixela-graph-wrap {
-  width: 300%;
-}
-</style>
