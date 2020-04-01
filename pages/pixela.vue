@@ -2,10 +2,38 @@
   <v-layout>
     <v-flex class="text-center">
       <h1>Pixela Web UI</h1>
-      <a :href="urlGraph" target="_blank" rel="noopener noreferrer">
-        <h2>Vital Warmth</h2>
-        <img :src="urlSVG" alt="peaceiris Vital Warmth" />
-      </a>
+
+      <v-row>
+        <v-col cols="12" sm="6" md="6">
+          <a
+            :href="`${urlGraphSVGDiff}.html`"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2>Vital Warmth Diff</h2>
+            <img
+              :src="urlGraphSVGDiff + '#svgView(viewBox(480, 0, 720, 135))'"
+              alt="peaceiris vital warmth difference between current and nomal"
+              class="pixela-graph-wrap"
+            />
+          </a>
+        </v-col>
+        <v-col cols="12" sm="6" md="6">
+          <a
+            :href="`${urlGraphSVGActual}.html`"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2>Vital Warmth Actual</h2>
+            <img
+              :src="urlGraphSVGActual + '#svgView(viewBox(480, 0, 720, 135))'"
+              alt="peaceiris actual vital warmth"
+              class="pixela-graph-wrap"
+            />
+          </a>
+        </v-col>
+      </v-row>
+
       <v-form>
         <v-container fluid>
           <v-row>
@@ -49,7 +77,14 @@
               />
             </v-col>
             <v-col cols="12" sm="6" md="6">
-              <v-btn color="primary" rounded @click="createPixel()">
+              <v-btn
+                color="primary"
+                rounded
+                @click="
+                  createPixel(username, graph1, selected - nomal)
+                  createPixel(username, graph2, selected)
+                "
+              >
                 Submit Today
               </v-btn>
             </v-col>
@@ -57,7 +92,14 @@
               {{ response }}
             </v-col>
             <v-col cols="12" sm="6" md="6">
-              <v-btn color="red" rounded @click="deletePixel()">
+              <v-btn
+                color="red"
+                rounded
+                @click="
+                  deletePixel(username, graph1)
+                  deletePixel(username, graph2)
+                "
+              >
                 Delete Today
               </v-btn>
             </v-col>
@@ -72,8 +114,9 @@
 import axios from 'axios'
 
 const nomalTemp = 36.9
-const urlSVG = 'https://pixe.la/v1/users/peaceiris/graphs/vital-warmth'
-const urlGraph = `${urlSVG}.html`
+const urlUserGraphs = 'https://pixe.la/v1/users/peaceiris/graphs'
+const urlGraphSVGDiff = `${urlUserGraphs}/vital-warmth`
+const urlGraphSVGActual = `${urlUserGraphs}/vital-warmth-act`
 
 function getTempItems() {
   const items = []
@@ -96,17 +139,13 @@ function formatDate(date, format) {
   return format
 }
 
-function openInNewTab(url) {
-  const win = window.open(url, '_blank')
-  win.focus()
-}
-
 export default {
   data() {
     return {
       username: 'peaceiris',
       token: '',
-      graph: 'vital-warmth',
+      graph1: 'vital-warmth',
+      graph2: 'vital-warmth-act',
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 50 || 'Min 50 characters'
@@ -115,22 +154,22 @@ export default {
       selected: `${nomalTemp}`,
       items: getTempItems(),
       response: '',
-      urlSVG,
-      urlGraph
+      urlGraphSVGDiff,
+      urlGraphSVGActual
     }
   },
   methods: {
-    createPixel() {
+    createPixel(username, graph, pixel) {
       let url = ''
       if (process.env.NODE_ENV === 'production') {
-        url = `https://pixe.la/v1/users/${this.username}/graphs/${this.graph}`
+        url = `https://pixe.la/v1/users/${username}/graphs/${graph}`
       } else {
-        url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}`
+        url = `/api-pixela/v1/users/${username}/graphs/${graph}`
       }
       const date = new Date()
       const content = {
         date: `${formatDate(date, 'yyyyMMdd')}`,
-        quantity: `${this.selected - this.nomal}`
+        quantity: `${pixel}`
       }
       const options = {
         method: 'POST',
@@ -144,20 +183,19 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
-          openInNewTab(this.urlGraph)
         })
         .catch((error) => {
           alert(error)
         })
     },
-    deletePixel() {
+    deletePixel(username, graph) {
       const date = new Date()
       const today = `${formatDate(date, 'yyyyMMdd')}`
       let url = ''
       if (process.env.NODE_ENV === 'production') {
-        url = `https://pixe.la/v1/users/${this.username}/graphs/${this.graph}/${today}`
+        url = `https://pixe.la/v1/users/${username}/graphs/${graph}/${today}`
       } else {
-        url = `/api-pixela/v1/users/${this.username}/graphs/${this.graph}/${today}`
+        url = `/api-pixela/v1/users/${username}/graphs/${graph}/${today}`
       }
       const options = {
         method: 'DELETE',
@@ -170,7 +208,6 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
-          openInNewTab(this.urlGraph)
         })
         .catch((error) => {
           alert(error)
@@ -179,3 +216,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.pixela-graph-wrap {
+  width: 300%;
+}
+</style>
