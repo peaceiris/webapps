@@ -19,7 +19,7 @@
               <h2>Vital Warmth Diff</h2>
               <v-img
                 :key="imageShowKey"
-                :src="`${urlGraphSVGDiff}?${urlQueryMode}&${urlQueryTheme}`"
+                :src="`${urlGraphSVGDiff}?${urlQueryMode}&${urlQueryTheme}&${imageShowKey}`"
                 alt="peaceiris vital warmth difference between current and nomal"
                 @load="loadedImage"
               />
@@ -39,7 +39,7 @@
               <h2>Vital Warmth Actual</h2>
               <v-img
                 :key="imageShowKey"
-                :src="`${urlGraphSVGActual}?${urlQueryMode}&${urlQueryTheme}`"
+                :src="`${urlGraphSVGActual}?${urlQueryMode}&${urlQueryTheme}&${imageShowKey}`"
                 alt="peaceiris actual vital warmth"
                 @load="loadedImage"
               />
@@ -117,11 +117,6 @@
             <v-col cols="12" sm="6" md="6">
               {{ response }}
             </v-col>
-            <v-col cols="12" sm="6" md="6">
-              <v-btn color="info" rounded @click="reload()">
-                Reload page
-              </v-btn>
-            </v-col>
           </v-row>
         </v-container>
       </v-form>
@@ -138,6 +133,7 @@ const queryMode = 'mode=short'
 const queryTheme = 'appearance=dark'
 const urlGraphSVGDiff = `${urlUserGraphs}/vital-warmth`
 const urlGraphSVGActual = `${urlUserGraphs}/vital-warmth-act`
+const waitSeconds = 1000
 
 function getTempItems() {
   const items = []
@@ -208,6 +204,9 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
+          setTimeout(() => {
+            this.imageShowKey += 1
+          }, waitSeconds)
         })
         .catch((error) => {
           alert(error)
@@ -233,6 +232,9 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
+          setTimeout(() => {
+            this.imageShowKey += 1
+          }, waitSeconds)
         })
         .catch((error) => {
           this.response = error
@@ -240,9 +242,6 @@ export default {
     },
     loadedImage() {
       this.isLoading = false
-    },
-    reload() {
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
     }
   }
 }
