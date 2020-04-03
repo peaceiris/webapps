@@ -33,6 +33,9 @@
           <v-btn color="primary" nuxt to="/qrcode-generator">
             QR Code Generator
           </v-btn>
+          <v-btn color="primary" nuxt to="/pixela">
+            Pixela Web UI
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
