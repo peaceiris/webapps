@@ -5,7 +5,7 @@
 
       <v-container fluid>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" sm="6" md="6">
             <v-progress-circular
               v-if="isLoading"
               indeterminate
@@ -19,13 +19,13 @@
               <h2>Vital Warmth Diff</h2>
               <v-img
                 :key="imageShowKey"
-                :src="urlGraphSVGDiff"
+                :src="`${urlGraphSVGDiff}?${urlQueryMode}&${urlQueryTheme}`"
                 alt="peaceiris vital warmth difference between current and nomal"
                 @load="loadedImage"
               />
             </a>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" sm="6" md="6">
             <v-progress-circular
               v-if="isLoading"
               indeterminate
@@ -39,7 +39,7 @@
               <h2>Vital Warmth Actual</h2>
               <v-img
                 :key="imageShowKey"
-                :src="urlGraphSVGActual"
+                :src="`${urlGraphSVGActual}?${urlQueryMode}&${urlQueryTheme}`"
                 alt="peaceiris actual vital warmth"
                 @load="loadedImage"
               />
@@ -103,9 +103,6 @@
               </v-btn>
             </v-col>
             <v-col cols="12" sm="6" md="6">
-              {{ response }}
-            </v-col>
-            <v-col cols="12" sm="6" md="6">
               <v-btn
                 color="red"
                 rounded
@@ -115,6 +112,14 @@
                 "
               >
                 Delete Today
+              </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              {{ response }}
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              <v-btn color="info" rounded @click="reload()">
+                Reload page
               </v-btn>
             </v-col>
           </v-row>
@@ -129,6 +134,8 @@ import axios from 'axios'
 
 const nomalTemp = 36.9
 const urlUserGraphs = 'https://pixe.la/v1/users/peaceiris/graphs'
+const queryMode = 'mode=short'
+const queryTheme = 'appearance=dark'
 const urlGraphSVGDiff = `${urlUserGraphs}/vital-warmth`
 const urlGraphSVGActual = `${urlUserGraphs}/vital-warmth-act`
 
@@ -160,23 +167,20 @@ export default {
       token: '',
       graph1: 'vital-warmth',
       graph2: 'vital-warmth-act',
+      nomal: `${nomalTemp}`,
+      selected: `${nomalTemp}`,
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 50 || 'Min 50 characters'
       },
-      nomal: `${nomalTemp}`,
-      selected: `${nomalTemp}`,
       items: getTempItems(),
       response: '',
       urlGraphSVGDiff,
       urlGraphSVGActual,
+      urlQueryMode: queryMode,
+      urlQueryTheme: queryTheme,
       isLoading: true,
       imageShowKey: 0
-    }
-  },
-  provide() {
-    return {
-      reload: this.reload
     }
   },
   methods: {
@@ -204,9 +208,6 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
-          setTimeout(() => {
-            this.imageShowKey += 1
-          }, 500)
         })
         .catch((error) => {
           alert(error)
@@ -232,16 +233,16 @@ export default {
       axios(options)
         .then((response) => {
           this.response = response.data
-          setTimeout(() => {
-            this.imageShowKey += 1
-          }, 500)
         })
         .catch((error) => {
-          alert(error)
+          this.response = error
         })
     },
     loadedImage() {
       this.isLoading = false
+    },
+    reload() {
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
     }
   }
 }
