@@ -133,7 +133,7 @@ const queryMode = 'mode=short'
 const queryTheme = 'appearance=dark'
 const urlGraphSVGDiff = `${urlUserGraphs}/vital-warmth`
 const urlGraphSVGActual = `${urlUserGraphs}/vital-warmth-act`
-const waitSeconds = 1000
+const waitSeconds = 500
 
 function getTempItems() {
   const items = []
