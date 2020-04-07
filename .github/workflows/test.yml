@@ -25,22 +25,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Read .nvmrc
-      #   run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
-      #   id: nvm
+      - name: Read .nvmrc
+        run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
+        id: nvm
 
-      # - name: setup node
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      # - name: Cache dependencies
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: ~/.npm
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-node-
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - run: npm ci
       - run: npm run format:check
