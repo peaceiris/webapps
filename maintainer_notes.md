@@ -19,9 +19,17 @@ npm run generate
 
 ## Roadmap
 
-QR Code type
+## QR Code
+
+qrcode type
 
 - Wi-Fi [QRコード作成【無料】Wi-Fiかんたん登録／QRのススメ](https://qr.quel.jp/form-wifi.php)
+
+Shape Detection API
+
+- [The Shape Detection API: a picture is worth a thousand words, faces, and barcodes](https://web.dev/shape-detection/)
+
+### 字幕・翻訳
 
 リアルタイム字幕・リアルタイム翻訳・テキストのエクスポート
 
