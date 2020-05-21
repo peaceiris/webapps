@@ -23,6 +23,10 @@ QR Code type
 
 - Wi-Fi [QRコード作成【無料】Wi-Fiかんたん登録／QRのススメ](https://qr.quel.jp/form-wifi.php)
 
+リアルタイム字幕・リアルタイム翻訳・テキストのエクスポート
+
+- [1heisuzuki/speech-to-text-webcam-overlay: Web Speech API で音声認識した結果の字幕をWebカメラ映像に重ねて表示するWebページ](https://github.com/1heisuzuki/speech-to-text-webcam-overlay)
+
 
 
 ## Development
