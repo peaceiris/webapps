@@ -23,6 +23,7 @@ npm run generate
 
 qrcode type
 
+- [Barcode Contents · zxing/zxing Wiki](https://github.com/zxing/zxing/wiki/Barcode-Contents)
 - Wi-Fi [QRコード作成【無料】Wi-Fiかんたん登録／QRのススメ](https://qr.quel.jp/form-wifi.php)
 
 Shape Detection API
