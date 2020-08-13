@@ -7,9 +7,6 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    types:
-      - opened
-      - synchronize
     paths-ignore:
       - '**.md'
 
@@ -45,7 +42,7 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint
-      - run: npm test
+#       - run: npm test
 
       - name: Upload test coverage as artifact
         uses: actions/upload-artifact@v1
