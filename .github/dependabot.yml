@@ -9,3 +9,5 @@ updates:
   - dependencies
   commit-message:
     prefix: deps
+  allow:
+  - dependency-type: "production"
